@@ -1,20 +1,24 @@
 const pickUp = require('./pickup')
-const constants = require('./constants')
+// const constants = require('./constants')
+import * as constants from './constants';
 const getState = require('./globalState').getState
 const setState = require('./globalState').setState
-const { BS } = constants
+const BS = constants.BS
 
 // Determine what type of blocks the player will be on after moving
 module.exports = (row, col, p, io) => {
     const { xpos, ypos } = p
-    if (xpos == undefined) return
-    const { map } = getState()
+    if (xpos === undefined) return
+    const map = getState().map
     const cornerBlocks = {}
     let r, c
 
     const defaultPosition = [
         [
-            { row: Math.floor(ypos / BS), col: Math.floor(xpos / BS) },
+            {
+                row: Math.floor(ypos / BS),
+                col: Math.floor(xpos / BS)
+            },
             {
                 row: Math.floor(ypos / BS),
                 col: Math.floor((xpos + BS - 1) / BS),
@@ -34,8 +38,10 @@ module.exports = (row, col, p, io) => {
 
     for (let i = 0; i < 2; ++i) {
         for (let j = 0; j < 2; ++j) {
+
             r = row === undefined ? defaultPosition[i][j].row : row
             c = col === undefined ? defaultPosition[i][j].col : col
+            let X = map[3][3]
             const block = map[r][c]
 
             if (block === 'w') return false

@@ -1,24 +1,26 @@
-const express = require('express')
-const path = require('path')
+'use strict';
+import express from 'express';
+const path = require('path');
+import { join } from 'path'
 const app = express()
 const server = require('http').Server(app)
 const io = require('socket.io')(server)
-const constants = require('./constants')
+import * as constants from './constants';
 
-const mapUtils = require('./map')
-const getState = require('./globalState').getState
-const setState = require('./globalState').setState
-const updateEnemies = require('./updateEnemies')
-const updateGuy = require('./updateGuy')
-const initNewPlayer = require('./initNewPlayer')
-const updateHealth = require('./updateHealth')
-const dropItem = require('./dropItem')
+import { getTheMap } from './map'
+import { getState } from './globalState'
+import { setState } from './globalState'
+import updateEnemies from './updateEnemies'
+import updateGuy from './updateGuy'
+import initNewPlayer from './initNewPlayer'
+import updateHealth from './updateHealth'
+import dropItem from './dropItem'
 
-app.use(express.static(path.join(__dirname, '../dist')))
+app.use('/static', express.static(path.join(__dirname, '../dist')))
 
-const map = mapUtils.getTheMap()
+const map = getTheMap()
 const { enemies } = getState()
-const { BS } = constants
+const BS = constants.BS
 
 for (let row = 0; row < map.length; ++row) {
     for (let col = 0; col < map[0].length; ++col) {
@@ -47,6 +49,7 @@ for (let row = 0; row < map.length; ++row) {
 }
 
 setState({ map })
+
 
 // Send updates to all connected clients
 setInterval(() => {
