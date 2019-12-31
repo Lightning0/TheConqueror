@@ -2,7 +2,7 @@
     "liveServer.settings.donotShowInfoMsg": true,
     "editor.minimap.enabled": false,
     "editor.formatOnSave": true,
-    "window.zoomLevel": 0,
+    "window.zoomLevel": 1,
     "git.enableSmartCommit": true,
     "editor.tabSize": 4,
     "prettier.singleQuote": true,

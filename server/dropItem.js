@@ -1,6 +1,6 @@
-const { BS } = require('./constants')
+import { BS } from './constants'
 
-module.exports = (io, map, entity, item) => {
+export default (io, map, entity, item) => {
     const row = Math.floor((entity.ypos + 0.5 * BS) / BS)
     const col = Math.floor((entity.xpos + 0.5 * BS) / BS)
 

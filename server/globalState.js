@@ -6,8 +6,8 @@ let state = {
     next: undefined,
 }
 
-exports.getState = () => state
+export function getState() { return state }
 
-exports.setState = newState => {
+export function setState(newState) {
     state = { ...state, ...newState }
 }

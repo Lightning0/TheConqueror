@@ -1,7 +1,7 @@
 const getState = require('./globalState').getState
 const setState = require('./globalState').setState
 const { BS } = require('./constants')
-const dropItem = require('./dropItem')
+const dropItem = require('./dropItem').default
 
 module.exports = io => {
     const { players, enemies } = getState()
